@@ -8,27 +8,45 @@ import TodoList from './components/TodoList';
 //showing vs code github setup
 class App extends React.Component {
   state = {
-    items: [{ id: 1, title: "wake up" }, { id: 2, title: "make breakfast" }],
+    items: [],
     id: uuid(),
     item: '',
     editItem: false
   };
-  handleChange = (e) => {console.log('handle change') }
-  handleSubmit = (e) => {console.log('handle Submit') }
-  clearList = (e) => { console.log('clear list') }
-  handleDelete = (id) => { console.log('handle edit ${ id }') }
-  handleEdit = (id) => {console.log(' handle edit ${id} ')}
-  
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-10.mx-auto.col-md-8.mt-4">
-            <h3 className="text-capitalize text-center">todo TodoInput
-            </h3>
-          </div>
-        </div>
-        <div className="row">
+  handleChange = (e) => {
+    this.setState({
+      item: e.target.value
+    });
+};
+handleSubmit = (e) => {
+  e.preventDefault();
+  const newItem = {
+    id: this.state.id,
+    title: this.state.item
+  };
+
+  const updatedItems = [...this.state.items, newItem];
+
+  this.setState(
+    {
+      items: updatedItems,
+      item: "",
+      id: uuid(),
+      editItem: false
+    },
+  );
+};
+
+  clearList = (e) => {  }
+  handleDelete = (id) => {  }
+handleEdit = (id) => {  };
+
+render() {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-10.mx-auto.col-md-8.mt-4">
+          <h3 className="text-capitalize text-center">todo Input</h3>
           <TodoInput
             item={this.state.item}
             handleChange={this.handleChange}
@@ -43,8 +61,9 @@ class App extends React.Component {
           />
         </div>
       </div>
-    );
-  }
+    </div>
+  )
+}
 }
 
 export default App;
