@@ -15,7 +15,8 @@ export default class TodoInput extends React.Component {
                     value={item}
                         onChange={handleChange} />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary mt-3 text-uppcase">Click me to add item</button>
+                <button type="submit"
+                disabled={item?false:true}    className="btn btn-block btn-primary mt-3 text-uppcase">{editItem ? 'edit item' : 'add item'}Click me to add item</button>
             </form>
         </div>
     }
